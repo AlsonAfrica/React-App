@@ -1,7 +1,7 @@
 html{
     margin:0px;
     padding:0px;
-    /* background-color: black; */
+    background-color: black;
   }
   .wrapper{
     background-color: aliceblue;
@@ -53,7 +53,6 @@ html{
   .forgot-password:hover{
     color:blue;
     text-decoration: underline;
-    cursor: pointer;
   }
   .button-container{
     /* background-color: aqua; */
@@ -62,53 +61,39 @@ html{
     align-items: center;
     justify-content: center;
   }
-  /* .button-container > button{
+  .button-container > button{
     width:200px;
     height: 25px;
     margin-top: 10px;
+    margin-bottom: 20px;
     border-radius: 10px;
-  } */
+  }
   .logo-container{
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .sub-btn:hover{
+  .button-container > button:hover{
     cursor:pointer;
     text-transform: uppercase;
     letter-spacing: 0.2em;
     border: 2px pink;
     background-color:cornsilk;
 }
-.sign-btn{
-  width:200px;
-  height: 25px;
-  margin-top: 10px;
-  border-radius: 10px;
+@media screen and (max-width:600px){
+    .form-container{
+        width:400px;
+    }
+    input{
+        width:250px;
+    }
 }
-.sign-btn:hover{
-  cursor:pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  border: 2px pink;
-  background-color:cornsilk;
+@media screen and (max-width:400px){
+    .form-container{
+        width:260px;
+    }
+    input{
+        width:200px;
+    }
 }
 
-@media screen and (max-width: 520px) {
-  .form-container {
-    width: 300px;
-  }
-
-  input {
-    width: 200px;
-  }
-}
-@media screen and (max-width: 320px) {
-  .form-container {
-    width: 250px;
-  }
-
-  input {
-    width: 170px;
-  }
-}
