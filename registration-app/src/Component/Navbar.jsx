@@ -8,8 +8,9 @@ const Navbar = () => {
         <a><img src="" alt="Logo" /></a>  
       </div>
       <ul className="navbar-links">
-        <li><Link to="">Add Employee</Link></li>
-        <li><Link to="">Update Profile</Link></li>
+      <li><Link to="/Home">Home</Link></li>
+        <li><Link to="/Form">Add Employee</Link></li>
+        {/* <li><Link to="">Update Profile</Link></li> */}
         <li><Link to="/">Log Out</Link></li>
       </ul>
     </nav>

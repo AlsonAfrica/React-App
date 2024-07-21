@@ -1,0 +1,32 @@
+.employee-form {
+    margin-bottom: 20px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .employee-form input {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    width: calc(100% - 20px);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .employee-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .employee-form button:hover {
+    background-color: #45a049;
+  }
+  .search-bar{
+    margin-bottom: 20px;
+  }
