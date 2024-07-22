@@ -11,6 +11,7 @@
     /* padding: 1rem; */
     min-height: 90px;
     border: 2px white;
+    flex-shrink: 0;
     
     /* width:100vw; */
     
@@ -42,6 +43,10 @@
     text-decoration: none;
     font-size: 20px;
   }
+  .logo-nav{
+    /* height:0px; */
+    width:65px;
+  }
   
   /* .navbar-links a:hover {
     text-decoration: underline;
@@ -55,5 +60,13 @@
     }
     .navbar-links a{
         font-size: 19px;
+    }
+    .navbar-links a{
+      font-size: 10px;
+    }
+  }
+  @media (max-width:500px){
+    .navbar-links{
+      flex-shrink: 0;
     }
   }

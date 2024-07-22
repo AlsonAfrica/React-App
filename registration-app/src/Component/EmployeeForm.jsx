@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useEmployeeContext } from '../contexts/EmployeeContext';
 import './EmployeeForm.css';
+import { IoMdPersonAdd } from "react-icons/io";
 
 const FormEmployee = () => {
   const { setEmployees } = useEmployeeContext();
@@ -59,13 +60,13 @@ const FormEmployee = () => {
 
   return (
     <form className="employee-form" onSubmit={handleSubmit}>
-      <h2>Add New Employee</h2>
+      <h2>ADD NEW EMPLOYEE</h2>
       <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
       <input type="text" placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} required />
       <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       <input type="text" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} required />
       <input type="text" placeholder="Position" value={position} onChange={(e) => setPosition(e.target.value)} required />
-      <input type="file" onChange={handleFileChange} required />
+      <input className="Image-input" type="file" onChange={handleFileChange} required />
       <button type="submit">Add Employee</button>
     </form>
   );

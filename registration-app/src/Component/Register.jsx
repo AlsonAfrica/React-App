@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
+import img1 from '../Images/SportsLogo.png'
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -43,7 +44,7 @@ const Register = () => {
         <div className="form">
           <form onSubmit={handleSubmit}>
             <div className="logo-container">
-              <img src="./" alt="Logo" className="logo" />
+              <img src={img1} alt="Logo" className="logo" />
             </div>
             <h1>Create<br />Account</h1>
             <div>

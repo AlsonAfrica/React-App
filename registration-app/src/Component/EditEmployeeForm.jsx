@@ -41,17 +41,20 @@ const EditEmployeeForm = ({ employeeToEdit, onSave, onCancel }) => {
   }, [employeeToEdit]);
 
   return (
-    <form className="employee-form" onSubmit={handleSubmit}>
-      <h2>Edit Employee</h2>
-      <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
-      <input type="text" placeholder="ID" value={id} readOnly />
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      <input type="text" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} required />
-      <input type="text" placeholder="Position" value={position} onChange={(e) => setPosition(e.target.value)} required />
-      <input type="file" onChange={handleFileChange} />
-      <button type="submit">Save Changes</button>
-      <button type="button" onClick={onCancel}>Cancel</button>
-    </form>
+ 
+      <form className="employee-form" onSubmit={handleSubmit}>
+        <h2 className="Edit-Employee">EDIT EMPLOYEE</h2>
+        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
+        <input type="text" placeholder="ID" value={id} readOnly />
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="text" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+        <input type="text" placeholder="Position" value={position} onChange={(e) => setPosition(e.target.value)} required />
+        <input type="file" className='Upload-img' onChange={handleFileChange} />
+        <button type="submit" className="Save-btn">Save Changes</button>
+        <button type="button" onClick={onCancel}>Cancel</button>
+     </form>
+   
+   
   );
 };
 

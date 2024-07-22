@@ -51,8 +51,8 @@ html{
     text-align: center;
   }
   .forgot-password:hover{
-    color:blue;
-    text-decoration: underline;
+    color:rgb(23, 186, 214);
+    text-decoration: none;
     cursor: pointer;
   }
   .button-container{
@@ -72,6 +72,13 @@ html{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
+    /* background-color: aqua; */
+    
+  }
+  .logo{
+       height:150px;
+       width:150px;
   }
   .sub-btn:hover{
     cursor:pointer;
