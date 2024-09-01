@@ -1,4 +1,3 @@
-// src/Component/EmployeeForm.jsx
 import React, { useState } from 'react';
 import { useEmployeeContext } from '../contexts/EmployeeContext';
 import './EmployeeForm.css';
@@ -12,6 +11,8 @@ const FormEmployee = () => {
   const [phone, setPhone] = useState('');
   const [position, setPosition] = useState('');
   const [picture, setPicture] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // State for loading
+  const [isSuccess, setIsSuccess] = useState(false); // State for success message
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -38,6 +39,8 @@ const FormEmployee = () => {
       return;
     }
 
+    setIsLoading(true); // Start loading
+
     const newEmployee = {
       name,
       id,
@@ -47,15 +50,26 @@ const FormEmployee = () => {
       picture: picture || 'https://via.placeholder.com/150'
     };
 
-    setEmployees(prevEmployees => [...prevEmployees, newEmployee]);
+    // Simulate a network request
+    setTimeout(() => {
+      setEmployees(prevEmployees => [...prevEmployees, newEmployee]);
 
-    // Clear form fields
-    setName('');
-    setId('');
-    setEmail('');
-    setPhone('');
-    setPosition('');
-    setPicture('');
+      // Clear form fields
+      setName('');
+      setId('');
+      setEmail('');
+      setPhone('');
+      setPosition('');
+      setPicture('');
+
+      setIsLoading(false); // Stop loading
+      setIsSuccess(true);  // Show success message
+
+      // Hide success message after 3 seconds
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000);
+    }, 2000); // Simulate a delay (e.g., 2 seconds)
   };
 
   return (
@@ -67,7 +81,11 @@ const FormEmployee = () => {
       <input type="text" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} required />
       <input type="text" placeholder="Position" value={position} onChange={(e) => setPosition(e.target.value)} required />
       <input className="Image-input" type="file" onChange={handleFileChange} required />
-      <button type="submit">Add Employee</button>
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? 'Adding...' : 'Add Employee'}
+      </button>
+
+      {isSuccess && <p className="success-message">Employee added successfully!</p>}
     </form>
   );
 };
