@@ -1,3 +1,4 @@
+// src/Component/EmployeeForm.jsx
 import React, { useState } from 'react';
 import { useEmployeeContext } from '../contexts/EmployeeContext';
 import './EmployeeForm.css';
@@ -11,8 +12,8 @@ const FormEmployee = () => {
   const [phone, setPhone] = useState('');
   const [position, setPosition] = useState('');
   const [picture, setPicture] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // State for loading
-  const [isSuccess, setIsSuccess] = useState(false); // State for success message
+  const [isLoading, setIsLoading] = useState(false); 
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -52,7 +53,16 @@ const FormEmployee = () => {
 
     // Simulate a network request
     setTimeout(() => {
-      setEmployees(prevEmployees => [...prevEmployees, newEmployee]);
+      setEmployees(prevEmployees => {
+        const updatedEmployees = [...prevEmployees, newEmployee];
+
+        // Save to local storage
+        localStorage.setItem('employees', JSON.stringify(updatedEmployees));
+        
+        // Log employee data
+        console.log('Employee added:', newEmployee);
+        return updatedEmployees;
+      });
 
       // Clear form fields
       setName('');
@@ -91,4 +101,3 @@ const FormEmployee = () => {
 };
 
 export default FormEmployee;
-

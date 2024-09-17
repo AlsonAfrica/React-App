@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useEmployeeContext } from '../contexts/EmployeeContext';
 import './EmployeeManagement.css';
 import EditEmployeeForm from './EditEmployeeForm';
@@ -8,10 +8,55 @@ const EmployeeManagement = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [editingEmployee, setEditingEmployee] = useState(null);
 
+  // Load initial data from localStorage once on mount
+  useEffect(() => {
+    const storedEmployees = localStorage.getItem('currentEmployees');
+    const storedPreviousEmployees = localStorage.getItem('previousEmployees');
+
+    if (storedEmployees) {
+      setEmployees(JSON.parse(storedEmployees));
+    } else {
+      setEmployees([]); // In case nothing is stored
+    }
+
+    if (storedPreviousEmployees) {
+      setPreviousEmployees(JSON.parse(storedPreviousEmployees));
+    } else {
+      setPreviousEmployees([]); // In case nothing is stored
+    }
+  }, [setEmployees, setPreviousEmployees]);
+
+  // Save current employees to localStorage whenever `employees` changes
+  useEffect(() => {
+    if (employees.length > 0) {
+      try {
+        localStorage.setItem('currentEmployees', JSON.stringify(employees));
+      } catch (error) {
+        console.error('Error saving current employees to localStorage:', error);
+      }
+    }
+  }, [employees]);
+
+  // Save previous employees to localStorage whenever `previousEmployees` changes
+  useEffect(() => {
+    if (previousEmployees.length > 0) {
+      try {
+        localStorage.setItem('previousEmployees', JSON.stringify(previousEmployees));
+      } catch (error) {
+        console.error('Error saving previous employees to localStorage:', error);
+      }
+    }
+  }, [previousEmployees]);
+
   const handleDelete = (id) => {
-    const employeeToDelete = employees.find(employee => employee.id === id);
-    setEmployees(employees.filter(employee => employee.id !== id));
-    setPreviousEmployees([...previousEmployees, employeeToDelete]);
+    const employeeToDelete = employees.find((employee) => employee.id === id);
+    if (employeeToDelete) {
+      const updatedEmployees = employees.filter((employee) => employee.id !== id);
+      const updatedPreviousEmployees = [...previousEmployees, employeeToDelete];
+
+      setEmployees(updatedEmployees);
+      setPreviousEmployees(updatedPreviousEmployees);
+    }
   };
 
   const handleEdit = (employee) => {
@@ -19,7 +64,10 @@ const EmployeeManagement = () => {
   };
 
   const handleSave = (updatedEmployee) => {
-    setEmployees(employees.map(employee => employee.id === updatedEmployee.id ? updatedEmployee : employee));
+    const updatedEmployees = employees.map((employee) =>
+      employee.id === updatedEmployee.id ? updatedEmployee : employee
+    );
+    setEmployees(updatedEmployees);
     setEditingEmployee(null);
   };
 
@@ -31,7 +79,9 @@ const EmployeeManagement = () => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredEmployees = employees.filter(employee => employee.id.includes(searchQuery));
+  const filteredEmployees = employees.filter((employee) =>
+    employee.id.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="employee-management">
@@ -74,10 +124,16 @@ const EmployeeManagement = () => {
                     <td>{employee.email}</td>
                     <td>{employee.phone}</td>
                     <td>{employee.position}</td>
-                    <td><img src={employee.picture} alt={employee.name} /></td>
+                    <td>
+                      <img src={employee.picture} alt={employee.name} />
+                    </td>
                     <td className="actions">
-                      <button className="edit-btn" onClick={() => handleEdit(employee)}>Edit</button>
-                      <button className="delete-btn" onClick={() => handleDelete(employee.id)}>Delete</button>
+                      <button className="edit-btn" onClick={() => handleEdit(employee)}>
+                        Edit
+                      </button>
+                      <button className="delete-btn" onClick={() => handleDelete(employee.id)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -106,7 +162,9 @@ const EmployeeManagement = () => {
                     <td>{employee.email}</td>
                     <td>{employee.phone}</td>
                     <td>{employee.position}</td>
-                    <td><img src={employee.picture} alt={employee.name} /></td>
+                    <td>
+                      <img src={employee.picture} alt={employee.name} />
+                    </td>
                   </tr>
                 ))}
               </tbody>
